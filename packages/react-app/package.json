@@ -41,9 +41,16 @@
     "extends": "react-app"
   },
   "scripts": {
-    "build": "react-scripts build",
+    "build": "npm run build:css && react-scripts build",
     "eject": "react-scripts eject",
-    "start": "react-scripts start",
-    "test": "react-scripts test"
+    "start": "npm run watch:css && react-scripts start",
+    "test": "react-scripts test",
+    "build:css": "postcss src/assets/tailwind.css -o src/assets/main.css",
+    "watch:css": "postcss src/assets/tailwind.css -o src/assets/main.css"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.6",
+    "postcss-cli": "^7.1.1",
+    "tailwindcss": "^1.6.2"
   }
 }

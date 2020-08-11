@@ -41,12 +41,16 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+
+        <h1 className="text-4xl">Tailwind Test</h1>
+
         <img src={logo} className="App-logo" alt="react-logo" />
         <p>
           Edit <code>packages/react-app/src/App.js</code> and save to reload.
         </p>
         {/* Remove the "display: none" style and open the JavaScript console in the browser to see what this function does */}
-        <button onClick={() => readOnChainData()} style={{ }}>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => readOnChainData()} >
           Read On-Chain Reserves
         </button>
         <a
