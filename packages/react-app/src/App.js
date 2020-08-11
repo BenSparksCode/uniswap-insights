@@ -4,7 +4,7 @@ import { Contract } from "@ethersproject/contracts";
 import { getDefaultProvider } from "@ethersproject/providers";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
-import { MAINNET_ID, addresses, abis } from "@uniswap-v2-app/contracts";
+import { MAINNET_ID, addresses, abis } from "@uniswap-insights/contracts";
 import "./App.css";
 
 // See more example queries on https://thegraph.com/explorer/subgraph/uniswap/uniswap-v2
