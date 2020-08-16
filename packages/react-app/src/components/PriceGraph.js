@@ -70,3 +70,12 @@ PriceGraph.defaultProps = {
 PriceGraph = fitWidth(PriceGraph)
 
 export default PriceGraph
+
+
+// Pair(id: 0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc){
+//     token0
+//     token1
+//   }
+
+// USDC Graph info
+// id: 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48
