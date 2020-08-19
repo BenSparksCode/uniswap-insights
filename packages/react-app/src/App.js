@@ -1,40 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Contract } from "@ethersproject/contracts";
 import { getDefaultProvider } from "@ethersproject/providers";
 import { useQuery } from "@apollo/react-hooks";
 import { MAINNET_ID, addresses, abis } from "@uniswap-insights/contracts";
 
-import Button from "./components/Button";
-import PriceGraph from './components/PriceGraph'
+import CandleChart from './components/CandleChart'
+import LineChart from './components/LineChart'
 
-import { LAST_USDC_ETH_SWAP } from './data/GraphQueries'
+import { LAST_USDC_ETH_SWAP, ETH_USDC_DAY_DATA } from './data/GraphQueries'
 
 // FOR TESTING
 import { PriceData } from './DummyData'
 
-// TODO - use this on chain approach to get all historic transactions for price graph
-async function readOnChainData() {
-  // Should replace with the end-user wallet, e.g. Metamask
-  const defaultProvider = getDefaultProvider();
-  // Create an instance of an ethers.js Contract
-  // Read more about ethers.js on https://docs.ethers.io/v5/api/contract/contract/
-  const usdcWethExchangeContract = new Contract(addresses[MAINNET_ID].pairs["USDC-WETH"], abis.pair, defaultProvider);
-  // Reserves held in the USDC-WETH pair contract
-  const reserves = await usdcWethExchangeContract.getReserves();
-  console.log({ reserves });
-}
-
 function App() {
+  // to get Canvas
+  const canvasRef = useRef(null)
 
+  // const { loading2, error2, data2 } = useQuery(ETH_USDC_DAY_DATA);
   const { loading, error, data } = useQuery(LAST_USDC_ETH_SWAP);
   const [price, setPrice] = useState(0)
 
   useEffect(() => {
-    console.log(data);
+    
+    if(error) console.log({error});
     if (!loading && !error && data && data.swaps) {
+      console.log(data.swaps[999]);
+      console.log(data.swaps.length);
       calcPrice(data.swaps[0])
     }
   }, [loading, error, data]);
+
+  // useEffect(() => {
+  //   console.log("NEW Q:",data2);
+  //   if (!loading2 && !error2 && data2) {
+  //     console.log("NEW Q:",data2);
+  //   }
+  // }, [loading2, error2, data2]);
 
   const calcPrice = (lastSwap) => {
     if (lastSwap) {
@@ -99,7 +100,8 @@ function App() {
         <h2 class="text-md font-bold mx-auto">ETH-USDC graph</h2>
 
         <div class="container border-solid border-4 border-red-500 h-auto rounded mx-auto">
-          <PriceGraph key={1} data={PriceData} />
+          {/* <CandleChart key={1} data={PriceData} />  */}
+          <LineChart />
         </div>
       </div>
 
